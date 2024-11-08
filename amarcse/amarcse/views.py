@@ -8,3 +8,6 @@ def INDEX(request):
 
 def REGISTER(request):
     return render(request,'components/register.html')
+
+def LOGIN(request):
+    return render(request,'components/login.html')
