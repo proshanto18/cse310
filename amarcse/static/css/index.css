@@ -1,0 +1,51 @@
+
+.ch1{
+	font-size: 48px !important;
+  font-weight: 600 !important;
+  color: var(--black) !important;
+}
+.c_text1{
+  margin:50px 0 10px 0px ;	
+}
+.tc{
+	  background-color: skyblue;
+    border-radius: 10px;
+    height: 27px;
+    text-align: center;
+    width: 121px;
+}
+.c_text2{
+  margin-bottom: 50px;
+}
+.bc{
+    text-align: center;
+    width: 700px;
+}
+.s_client{
+	margin-top: 10px;
+	padding: 10px 20px;
+	border-radius: 18px;
+	background-color: #cfea96;
+}
+.s_client:hover{
+	box-shadow: 1px -2px 29px -5px rgba(201,202,199,1);
+	transition: .33s ease-in-out !important;
+}
+.i_logo{
+	font-size: 30px;
+}
+.bt{
+	font-weight: 600;
+	background-color: #cfea96;
+	margin-top: 50px;
+	height: 56px ;
+	width: 150px ;
+	border-radius: 40px;
+}
+.bt:hover{
+	background-color: #91e229;
+	box-shadow: 1px -2px 29px -5px rgba(201,202,199,1);
+	transition: .33s ease-in-out !important;
+}
+
+
