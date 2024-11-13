@@ -2,25 +2,27 @@
 {% block content %}
 <body>
     <section>
-      <form action="" method="post">
-        <div class="container">
-          <h3>Login Here</h3>
+        <!-- Use {% url 'login' %} to avoid hardcoding paths -->
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <h3>Login Here</h3>
 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Email or Phone" id="username"><br>
+                <label for="username">Username</label>
+                <input type="text" placeholder="Enter Username" id="username" name="username"><br>
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter Password" id="password" name="password">
 
-        <button>Log In</button>
-        <div class="social">
-          <div class="go"><a href="../index.html">Register</a></div>
-          <div class="fb"><a href="">Forget password</a></div>
-        </div>
-        </div>
-      </form>
+                <button type="submit">Log In</button>
+
+                <div class="social">
+                    <!-- Link to registration using URL name -->
+                    <div class="go"><a href="{% url 'register' %}">Register</a></div>
+                    <div class="fb"><a href="{% url 'password_reset' %}">Forget password</a></div>
+                </div>
+            </div>
+        </form>
     </section>
 </body>
-
-
 {% endblock %}
