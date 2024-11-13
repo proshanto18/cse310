@@ -1,0 +1,85 @@
+.work{
+
+	background-color: #bfe087;
+	
+	height: 500px;
+}
+
+.heding h4{
+	
+		text-align: center;
+		margin-top: 40px;
+		padding-top: 60px;
+		
+}
+.heding h1{
+		text-align: center;
+}
+.heding p{
+		text-align: center;
+}
+.jus{
+		display: flex;
+		justify-content: space-between;
+}
+.detail{
+		background-color: #c0e27b;
+		margin-left: 5px;
+		border: 2px solid;
+		border-radius: 25px;
+}
+.second{
+		margin-top: 60px;
+}
+	
+.num h1{
+	
+	 display: flex;
+	
+	 justify-content: space-between;
+	
+	 margin-left: 30px;
+}
+.num h1 i{
+	
+	 margin-right: 30px;
+	
+	 margin-top: 5px;
+}
+	
+.explain h2{
+		
+	 margin-left: 30px;
+		
+	 font-weight: 700;
+}
+.explain p{
+		
+	 margin-left: 30px;
+		
+	 font-size: 20px;
+		
+	 line-height: 20px;
+		
+	 font-weight: 500;
+}
+
+.contact{
+	height: 300px;
+	width: 100%;
+	background-color: #bfe087;
+}
+.te{
+	text-align: center;
+}
+.te1{
+	padding-top: 20px;
+	font-size: 60px;
+	color: darkgreen;
+	font-weight: 600;
+}
+.te2{
+	font-size: 20px;
+	font-weight: 600;
+	padding-top: 20px;
+}
