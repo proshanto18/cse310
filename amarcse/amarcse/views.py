@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 def BASE(request):
     return render(request,'base.html')
@@ -9,20 +10,42 @@ def INDEX(request):
     return render(request,'components/index.html')
 
 def REGISTER(request):
-    if request.method=='POST':
-        uname= request.POST.get('username')
-        email= request.POST.get('email')
-        pw1= request.POST.get('password1')
-        pw2= request.POST.get('password1')
-       
-        if pw1!=pw2:
-            return HttpResponse("passwords do not match")
-        else:
-            my_user= User.objects.create_user(uname,email,pw1)
+    if request.method == 'POST':
+        uname = request.POST.get('username')
+        email = request.POST.get('email')
+        pw1 = request.POST.get('password1')
+        pw2 = request.POST.get('password2')  # Corrected to match 'password2' from the form
+
+        # Basic validations
+        if not uname or not email or not pw1 or not pw2:
+            messages.error(request, "All fields are required.")
+            return render(request, 'components/register.html')
+
+        if pw1 != pw2:
+            messages.error(request, "Passwords do not match.")
+            return render(request, 'components/register.html')
+
+        # Check if the username already exists
+        if User.objects.filter(username=uname).exists():
+            messages.error(request, "Username already taken.")
+            return render(request, 'components/register.html')
+
+        # Check if the email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered.")
+            return render(request, 'components/register.html')
+
+        # Create the user
+        try:
+            my_user = User.objects.create_user(username=uname, email=email, password=pw1)
             my_user.save()
-            return redirect('/')
-    else:
-      return render(request,'components/register.html')
+            messages.success(request, "Account created successfully. You can now log in.")
+            return redirect('login')  # Replace 'login' with the name of your login URL
+        except Exception as e:
+            messages.error(request, "An error occurred while creating the account.")
+            return render(request, 'components/register.html')
+
+    return render(request, 'components/register.html')
 
 def LOGIN(request):
     return render(request,'components/login.html')
