@@ -1,0 +1,30 @@
+.bag{
+	background-color: #cfea96;
+	height: 450px;
+}
+.textt{
+	padding-top: 50px;
+	padding-left: 120px;
+
+}
+.fh1{
+	color: green;
+	font-weight: 700;
+
+}
+.fh2{
+	color: royalblue;
+	font-weight: 700;
+}
+.fh3{
+	color: black;
+	font-weight: 700;
+}
+.p2{
+    padding-top:20px ;
+	font-size: 18px;
+	line-height: 22px;
+}
+.ico{
+	font-size: 50px;
+}
