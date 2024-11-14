@@ -64,3 +64,7 @@ def LOGIN(request):
 def LOGOUT(request):
     logout(request)
     return redirect("index")
+
+
+def USER(request):
+    return render(request, 'components/user.html')

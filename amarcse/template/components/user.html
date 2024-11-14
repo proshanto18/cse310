@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="sidebar">
+    <div class="user">
+      <img src="{% static 'img/user.png' %}" alt="user">
+      <h3>User Name</h3>
+    </div>
+    <ul>
+     
+      <li>Completed Course: 0</li>
+      <li>Completed Excercise: 0</li>
+    </ul>
+  </div>
+ 
+
+{% endblock %}
