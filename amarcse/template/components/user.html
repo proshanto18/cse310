@@ -1,18 +1,20 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-
 {% block content %}
-<div id="sidebar">
-    <div class="user">
-      <img src="{% static 'img/user.png' %}" alt="user">
-      <h3>User Name</h3>
-    </div>
-    <ul>
-     
-      <li>Completed Course: 0</li>
-      <li>Completed Excercise: 0</li>
-    </ul>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="card shadow-sm" style="width: 300px;">
+          <img src="{% static 'img/user.png' %}" alt="user" class="card-img-top">
+          <div class="card-body text-center">
+              <h3 class="card-title">User Name</h3>
+              <ul class="list-unstyled">
+                  <li><strong>Completed Courses:</strong> 0</li>
+                  <li><strong>Completed Exercises:</strong> 0</li>
+              </ul>
+          </div>
+      </div>
   </div>
- 
+</div>
 
 {% endblock %}
