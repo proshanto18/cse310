@@ -19,6 +19,12 @@ def CAREER_COURSE(request):
 def LECTURES(request):
     return render(request,'components/lectures.html')
 
+def LEARNINGCONTENT(request):
+    return render(request,'components/learningcontent.html')
+
+def EXERCISE(request):
+    return render(request,'components/exercise.html')
+
 def REGISTER(request):
     if request.method == 'POST':
         uname = request.POST.get('username')
