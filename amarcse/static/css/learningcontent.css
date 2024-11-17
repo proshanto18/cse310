@@ -1,0 +1,49 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.lecture_page{
+    background-color: #cfea96;
+}
+.lecture{
+
+padding: 40px 0;
+}
+.lecture h1{
+    
+text-align: center;
+    
+font-weight: 700;
+}
+.videos{
+    margin: 40px 0;
+
+}
+.videos iframe{
+    height: 800px;
+    
+width: 100%;
+}
+.lecture p{
+    box-shadow: 0px 0px 12px 0px rgba(46,44,46,1);
+    padding: 20px 15px;
+}
+.buttonn a{
+
+}
+.buttonn .btn{
+    
+text-align: center;
+    
+border: 2px solid;
+    
+background-color: #3fca44 !important;
+    
+border-radius: 20px;
+    
+padding: 10px 23px;
+}
+.buttonn{
+    text-align: center;
+}
