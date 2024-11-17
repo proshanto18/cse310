@@ -1,0 +1,29 @@
+.bd{
+	background-color:#cfea96 ;
+}
+.container{
+	background-color: white ;
+}
+.titlle{
+	color: green;
+	font-weight: 600;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.btnss{
+	padding-top: 50px;
+}
+.btns{
+	text-align: center;
+	height: 40px;
+	width: 100px;
+	border-radius: 15px;
+	border: 2px solid white;
+	background-color: #ff4040;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+}
+.btns:hover {
+	background-color: white;
+	transition: .33s ease-in-out ;
+}
