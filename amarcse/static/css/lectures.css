@@ -1,0 +1,41 @@
+
+.boxx{
+	margin-top: 20px;
+	background-color: #cfea96;
+	border: 2px solid white;
+	border-radius: 10px;
+
+}
+.button_b{
+	height: 40px;
+	width: 100px;
+	border: 1px solid green;
+	border-radius: 10px;
+	background-color: white;
+
+}
+.button_b:hover{
+	background-color: #e86931;
+}
+.listt{
+	padding-top: 50px;
+}
+.refer{
+	padding-top: 20px;
+	padding-left: 10px;
+
+}
+.refe{
+   padding-top: 20px;
+}
+.ref{
+	padding-top: 8px;
+	display: inline-block;
+	color: black;
+	height: 80px;
+	width: 600px;
+	text-decoration: none;
+	background-color: #cfea96;
+	border-radius: 10px;
+	
+}

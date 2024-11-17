@@ -12,8 +12,12 @@ def INDEX(request):
 
 def ACADEMIC_COURSE(request):
     return render(request,'components/academic_course.html')
+
 def CAREER_COURSE(request):
     return render(request,'components/career_course.html')
+
+def LECTURES(request):
+    return render(request,'components/lectures.html')
 
 def REGISTER(request):
     if request.method == 'POST':
