@@ -10,6 +10,11 @@ def BASE(request):
 def INDEX(request):
     return render(request,'components/index.html')
 
+def ACADEMIC_COURSE(request):
+    return render(request,'components/academic_course.html')
+def CAREER_COURSE(request):
+    return render(request,'components/career_course.html')
+
 def REGISTER(request):
     if request.method == 'POST':
         uname = request.POST.get('username')

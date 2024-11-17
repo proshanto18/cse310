@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+ <!-- Roadmap Switching Buttons -->
+ <div class="d-flex justify-content-center my-3">
+    <a href="{% url 'academic_course' %}" class="btn btn-primary mx-2">Academic Roadmap</a>
+    <a href="{% url 'career_course' %}" class="btn btn-primary mx-2">Career Roadmap</a>
+</div>
+
+<!-- Header -->
+<header class="bg-dark text-white text-center py-4">
+    <h1>Academic Roadmap</h1>
+    <p class="lead">Master Programming step-by-step!</p>
+</header>
+
+<!-- Main Content -->
+<main class="container my-5">
+    <div class="row g-4">
+        <!-- Roadmap Item 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://t3.ftcdn.net/jpg/02/95/56/86/360_F_295568616_JMXHElgLkElirkdavszIsyu7vi58Y3gh.jpg" alt="Structured Programming" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">1. Structured Programming</h5>
+                    <p class="card-text">Learn the basics of programming using python.</p>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Roadmap Item 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://img.freepik.com/free-vector/cute-boy-with-dog-cat-cartoon-icon-illustration_138676-2708.jpg" alt="Object Oriented Programming" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">2. Object Oriented Programming</h5>
+                    <p class="card-text">Understand the fundamentals of OOP.</p>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Item 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://i.pinimg.com/736x/3f/44/06/3f4406599220880b0c6f0bc41aa57f50.jpg" alt="DSA" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">3. Data Structures and Algrorithms</h5>
+                    <p class="card-text">Master Data Structure and Algorithms step by step.</p>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Item 4 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://bs-uploads.toptal.io/blackfish-uploads/components/blog_post_page/4084683/cover_image/retina_1708x683/0712-Bad_Practices_in_Database_Design_-_Are_You_Making_These_Mistakes_Dan_Newsletter-30b324c99280d4238b6e08c901379ec7.png" alt="Database" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                   
+                    <h5 class="card-title">4. Database</h5>
+                    <p class="card-text">Learn How mysql works and how to integrate databases into real life applications.</p>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Item 5 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://images.squarespace-cdn.com/content/v1/5a76a712b1ffb6249f02a9cf/1623377962577-H2S4XARBZMZN16U8JRIS/Teaching+Critical+Thinking+Skills" alt="Problem Solving" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">           
+                    <h5 class="card-title">5. Critical Thinking and Competitive Programmin</h5>
+                    <p class="card-text">Dive into  problem solving and algorithms.</p>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Item 6 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <img src="https://s3.amazonaws.com/creativetim_bucket/products/541/original/soft-ui-dashboard-django.jpg?1635849764" alt="Web Applications" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">6. OOP II: Web UI and Django Applications</h5>
+                    <p class="card-text">Learn how to make functional applications.</p>
+                    <a href="#" class="btn btn-primary">View Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
