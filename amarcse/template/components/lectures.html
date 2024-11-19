@@ -11,9 +11,12 @@
 
       <div class="boxx col-lg-12">
         <div class="btn">
-          <button class="btn button_b" type="button">Register</button>
+            <a class="btn button_b" type="button" href="#">Register</a>
+            <a class="btn button_b" type="button" href="{% url 'create-lecture' %}">Create</a>
+            <a class="btn button_b" type="button" href="{% url 'update-lecture' p_id=1 %}">Update</a>
+            <a class="btn button_b" type="button" href="{% url 'delete-lecture' p_id=1 %}">Delete</a>
+           
         </div>
-      </div>
 
       <div class="listt">
         <div>

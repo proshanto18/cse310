@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth.views import LoginView
+from django.conf.urls.static import static
+from . import settings
 from .import views
 
 urlpatterns = [
@@ -17,4 +19,9 @@ urlpatterns = [
     path('lectures/', views.LECTURES, name='lectures'),
     path('learn/', views.LEARNINGCONTENT, name='learningcontent'),
     path('exercise/', views.EXERCISE, name='exercise'),
+    path('lectures/',include('lectures.urls')),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
