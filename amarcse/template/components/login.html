@@ -3,9 +3,9 @@
 <body>
     <section>
         <!-- Use {% url 'login' %} to avoid hardcoding paths -->
-        <form action="{% url 'login' %}" method="post">
+        <form class="form" action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <div class="container">
+            <div>
                 <h3>Login Here</h3>
 
                 <label for="username">Username</label>
