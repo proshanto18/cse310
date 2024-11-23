@@ -1,13 +1,14 @@
 from django.contrib import admin
-from django.urls import path,include
-from django.contrib.auth.views import LoginView
+from django.urls import path
+
 from .import views
 
 urlpatterns = [
-    path('products_view',views.products_view,name='view'),
-    path('create_lecture',views.create_lecture,name='create-lecture'),
-    path('update_lecture/<int:p_id>/', views.update_lecture, name='update-lecture'),
-    path('delete_lecture/<int:p_id>/', views.delete_lecture, name='delete-lecture')
+        path('create/', views.create_lecture, name='create_lecture'),
+    path('update/<int:p_id>/', views.update_lecture, name='update_lecture'),
+    path('delete/<int:p_id>/', views.delete_lecture, name='delete_lecture'),
+    path('lectures/', views.lecture_list, name='lecture_list'),
+    path('products/', views.products_view, name='products_view')
 
 
 ]

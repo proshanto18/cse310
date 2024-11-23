@@ -12,33 +12,48 @@
       <div class="boxx col-lg-12">
         <div class="btn">
             <a class="btn button_b" type="button" href="#">Register</a>
-            <a class="btn button_b" type="button" href="{% url 'create-lecture' %}">Create</a>
-            <a class="btn button_b" type="button" href="{% url 'update-lecture' p_id=1 %}">Update</a>
-            <a class="btn button_b" type="button" href="{% url 'delete-lecture' p_id=1 %}">Delete</a>
-           
+            <a class="btn button_b" type="button" href="{% url 'create_lecture' %}">Create</a>
+
+
+
+        </div>
+      {% for i in lectures %}
+        <div>
+          <h2>Lecture {{ forloop.counter }}: {{ i.lecture_name }}</h2>
+          <a class="btn button_b" type="button" href="{% url 'update_lecture' i.id %}">Update</a>
+          <a class="btn button_b" type="button" href="{% url 'delete_lecture' i.id %}">Delete</a>
         </div>
 
-      <div class="listt">
-        <div>
-          <h1>Lecture List:</h1>
-        </div>
-        <div class="refer">
-         <div class="row">
-           <div class="col-lg-12 refe">
-            <a href="{% url 'learningcontent' %}" class="ref"><h1>Lecture 1</h1></a>
-           </div>
-           <div class="col-lg-12 refe">
-            <a href="{% url 'learningcontent' %}" class="ref"><h1>Lecture 2</h1></a>
-           </div>
-           <div class="col-lg-12 refe">
-            <a href="{% url 'learningcontent' %}" class="ref"><h1>Lecture 3</h1></a>
-           </div>
-           <div class="col-lg-12 refe">
-            <a href="{% url 'learningcontent' %}" class="ref"><h1>Lecture 4</h1></a>
-           </div>
-         </div>
-        </div>
-      </div>
+          <!-- Display the video if it exists -->
+          {% if i.video %}
+          <video width="640" height="360" controls>
+              <source src="{{ i.video.url }}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          {% else %}
+          <p>No video available for this lecture.</p>
+          {% endif %}
+
+          {% if i.image %}
+          <p>
+              <img src="{{ i.image.url }}"  height="250px">
+              <a href="{{ i.image.url }}" target="_blank">Download image</a>
+          </p>
+        {% else %}
+          <br>
+        {% endif %}
+
+          <!-- Display the PDF file if it exists -->
+        {% if i.notes %}
+          <p>
+              <a href="{{ i.notes.url }}" target="_blank">Download/ View Notes</a>
+          </p>
+        {% else %}
+          <p>No notes available for this lecture.</p>
+        {% endif %}
+      {% endfor %}
+
+
 
     </div>
 </section>

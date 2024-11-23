@@ -4,4 +4,12 @@ from .models import Lecture
 class LectureForm(forms.ModelForm):
     class Meta:
         model = Lecture
-        fields= "__all__"
+        fields = ['lecture_name', 'notes', 'video', 'image']  # Ensure all model fields are included
+
+    # Optional: Add custom validation for each field if necessary
+    def clean_lecture_name(self):
+        name = self.cleaned_data.get('lecture_name')
+        if not name:
+            raise forms.ValidationError('This field is required')
+
+        return name
