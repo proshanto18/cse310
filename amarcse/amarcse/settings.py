@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     #external apps
     'lectures',
+    'course',
 ]
 
 MIDDLEWARE = [

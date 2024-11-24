@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
- <!-- Roadmap Switching Buttons -->
- <div class="d-flex justify-content-center my-3">
+<!-- Roadmap Switching Buttons -->
+<div class="d-flex justify-content-center my-3">
     <a href="{% url 'academic_course' %}" class="btn btn-primary mx-2">Academic Roadmap</a>
     <a href="{% url 'career_course' %}" class="btn btn-primary mx-2">Career Roadmap</a>
 </div>
@@ -12,62 +11,33 @@
 <header class="bg-dark text-white text-center py-4">
     <h1>Career Roadmap</h1>
     <p class="lead">Master Programming step-by-step!</p>
+    <a class="btn btn-success mx-2" href="{% url 'create_course' %}">Create A Course</a>
 </header>
 
 <!-- Main Content -->
 <main class="container my-5">
-    <div class="row g-4">
-        <!-- Roadmap Item 1 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm">
-                <img src="https://www.afternerd.com/blog/wp-content/uploads/2018/03/The-Coding-Interview-from-start-to-finish.png" alt="interviews" class="card-img-top" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title">Master Coding Interviews</h5>
-                    <p class="card-text">A guideline on coding interviews conducted by different firms.</p>
-                    <a href="{% url 'lectures' %}" class="btn btn-primary">View Course</a>
-                </div>
-            </div>
-        </div>
+    <div class="btn my-3">
 
-
-        <!-- Roadmap Item 2 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm">
-                <img src="https://www.deviq.io/hubfs/DevIQ%20website%20active%20images/ai-ml-dl-ds-venn-diagram-deviq.png" alt="Machine Learning" class="card-img-top" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title">Machine learning & Data Science Fundamentals</h5>
-                    <p class="card-text">Learn what it takes to become a Data Scientist</p>
-                    <a href="{% url 'lectures' %}" class="btn btn-primary">View Course</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Roadmap Item 3 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm">
-                <img src="https://solguruz.com/_next/image/?url=https%3A%2F%2Fblog.solguruz.com%2Fwp-content%2Fuploads%2F2023%2F11%2FFlutter-for-Hybrid-Apps-Why-Flutter-is-the-Best-Platform-to-Make-Hybrid-Apps.png&w=1080&q=75" alt="Flutter" class="card-img-top" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title">Cross Platform Mobile App Development</h5>
-                    <p class="card-text">Fundamentals on cross platform app development using flutter</p>
-                    <a href="{% url 'lectures' %}" class="btn btn-primary">View Course</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Roadmap Item 4 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm">
-                <img src="https://markovate.com/wp-content/uploads/2022/08/top-MERN-Stack.webp" alt="MERN" class="card-img-top" style="height: 200px; object-fit: cover;">
-                <div class="card-body">
-                   
-                    <h5 class="card-title">MERN Stack</h5>
-                    <p class="card-text">Project base course on MERN Stack web development</p>
-                    <a href="{% url 'lectures' %}" class="btn btn-primary">View Course</a>
-                </div>
-            </div>
-        </div>
-
-        
     </div>
+
+    {% if career_courses %}
+        <div class="row g-4">
+            {% for cc in career_courses %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ cc.image.url }}" alt="interviews" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cc.name }}</h5>
+                            <p class="card-text">{{ cc.description }}.</p>
+                            <a href="{% url 'lecture_list' cc.id %}" class="btn btn-primary">View Course</a> <!-- Update the URL to point to specific course lectures -->
+                            <a class="btn btn-danger mx-2" type="button" href="{% url 'delete_course' cc.id %}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No career courses available.</p> <!-- Message when there are no courses -->
+    {% endif %}
 </main>
 {% endblock %}

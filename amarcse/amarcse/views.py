@@ -1,10 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 from lectures.models import Lecture
+from course.models import Course
 
 
 def BASE(request):
@@ -16,19 +17,25 @@ def INDEX(request):
 
 
 def ACADEMIC_COURSE(request):
-    return render(request, 'components/academic_course.html')
+    academic_courses = Course.objects.filter(category='academic')
+    return render(request, 'components/academic_course.html', {'academic_courses': academic_courses})
 
 
 def CAREER_COURSE(request):
-    return render(request, 'components/career_course.html')
+    # Fetching all courses in the 'career' category
+    career_courses = Course.objects.filter(category='career')
+
+    # Rendering the 'career_course.html' template with the context
+    return render(request, 'components/career_course.html', {'career_courses': career_courses})
 
 
-def LECTURES(request):
-    lectures = Lecture.objects.all()
-    return render(request, 'components/lectures.html', {
-        'lectures': lectures
+def LECTURES(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    lectures = Lecture.objects.filter(course=course)
+    return render(request, 'components/lecture_list.html', {
+        'lectures': lectures,
+        'course': course
     })
-
 
 def LEARNINGCONTENT(request):
     return render(request, 'components/learningcontent.html')
@@ -84,7 +91,7 @@ def LOGIN(request):
         user = authenticate(request, username=uname, password=passw)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return render(request, 'components/index.html',{'username':uname})
         else:
             return HttpResponse("Username or password is incorrect!")
 
