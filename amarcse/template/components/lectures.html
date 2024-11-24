@@ -1,62 +1,59 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
 <section class="lecture">
-    <div class="container">
-      <div class="title">
-        <h1>Course name : Python</h1>
-      </div>
-
-      <div class="boxx col-lg-12">
-        <div class="btn">
-            <a class="btn button_b" type="button" href="#">Register</a>
-            <a class="btn button_b" type="button" href="{% url 'create_lecture' %}">Create</a>
+    <div class="container text-center">
+        <div class="title">
+            <h1>Course name: Python</h1>
         </div>
 
-      {% for i in lectures %}
-        <div>
-          <h2>Lecture {{ forloop.counter }}: {{ i.lecture_name }}</h2>
-          <a class="btn  button_b" type="button" href="{% url 'update_lecture' i.id %}">Update</a>
-          <a class="btn  button_b" type="button" href="{% url 'delete_lecture' i.id %}">Delete</a>
+        <div class="boxx col-lg-12">
+            <div class="btn my-3">
+
+                <a class="btn btn-success mx-2" type="button" href="{% url 'create_lecture' %}">Create A Lecture</a>
+            </div>
+
+            {% for i in lectures %}
+            <div class="card mx-auto my-4 p-3" style="max-width: 800px;background-color: #90b36a" >
+                <h2>Lecture {{ forloop.counter }}: {{ i.lecture_name }}</h2>
+                <div class="d-flex justify-content-center my-2">
+                    <a class="btn btn-warning mx-2" type="button" href="{% url 'update_lecture' i.id %}">Update</a>
+                    <a class="btn btn-danger mx-2" type="button" href="{% url 'delete_lecture' i.id %}">Delete</a>
+                </div>
+
+                <!-- Display the video if it exists -->
+                {% if i.video %}
+                <video class="mx-auto d-block my-3" width="640" height="360" controls>
+                    <source src="{{ i.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% else %}
+                <p>No video available for this lecture.</p>
+                {% endif %}
+
+                <!-- Display the image if it exists -->
+                {% if i.image %}
+                <div class="my-3">
+                    <img src="{{ i.image.url }}" class="img-fluid mx-auto d-block" style="height: 75%;">
+                    <a class="btn mx-auto my-4 p-3" href="{{ i.image.url }}" target="_blank" class="btn btn-link" type="button" style="background-color: #b7e18d">Download image</a>
+                </div>
+                {% else %}
+                <p>No image available for this lecture.</p>
+                {% endif %}
+
+                <!-- Display the PDF file if it exists -->
+                {% if i.notes %}
+                <div>
+                    <a  class="btn mx-auto my-4 p-3" href="{{ i.notes.url }}" type="button" target="_blank" class="btn btn-link" style="background-color: #b7e18d">Download/ View Notes</a>
+                </div>
+                {% else %}
+                <p>No notes available for this lecture.</p>
+                {% endif %}
+            </div>
+            {% endfor %}
         </div>
-
-          <!-- Display the video if it exists -->
-        <div>
-          {% if i.video %}
-          <div class="videos">
-            <video width="640" height="360" controls>
-              <source src="{{ i.video.url }}" type="video/mp4">
-            </video>
-          </div>
-          {% else %}
-          <p>No video available for this lecture.</p>
-          {% endif %}
-
-          {% if i.image %}
-          <p>
-              <img src="{{ i.image.url }}"  height="250px">
-              <a href="{{ i.image.url }}" target="_blank">Download image</a>
-          </p>
-        {% else %}
-          <br>
-        {% endif %}
-
-          <!-- Display the PDF file if it exists -->
-        {% if i.notes %}
-          <p>
-              <a href="{{ i.notes.url }}" target="_blank">Download/ View Notes</a>
-          </p>
-        {% else %}
-          <p>No notes available for this lecture.</p>
-        {% endif %}
-      {% endfor %}
-
-
-    </div>    
     </div>
-  </div>
 </section>
 
 {% endblock %}
