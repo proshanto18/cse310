@@ -25,10 +25,11 @@
           <!-- Display the video if it exists -->
         <div>
           {% if i.video %}
-          <video width="640" height="360" controls>
+          <div class="videos">
+            <video width="640" height="360" controls>
               <source src="{{ i.video.url }}" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
+            </video>
+          </div>
           {% else %}
           <p>No video available for this lecture.</p>
           {% endif %}

@@ -18,8 +18,10 @@
 .button_b:hover{
 	background-color: #e86931;
 }
-.video{
-	align-items: center;
+.videos{
+	padding: 20px;
+	display: block;
+	margin: auto;
 }
 .listt{
 	padding-top: 50px;
