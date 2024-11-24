@@ -13,18 +13,17 @@
         <div class="btn">
             <a class="btn button_b" type="button" href="#">Register</a>
             <a class="btn button_b" type="button" href="{% url 'create_lecture' %}">Create</a>
-
-
-
         </div>
+
       {% for i in lectures %}
         <div>
           <h2>Lecture {{ forloop.counter }}: {{ i.lecture_name }}</h2>
-          <a class="btn button_b" type="button" href="{% url 'update_lecture' i.id %}">Update</a>
-          <a class="btn button_b" type="button" href="{% url 'delete_lecture' i.id %}">Delete</a>
+          <a class="btn  button_b" type="button" href="{% url 'update_lecture' i.id %}">Update</a>
+          <a class="btn  button_b" type="button" href="{% url 'delete_lecture' i.id %}">Delete</a>
         </div>
 
           <!-- Display the video if it exists -->
+        <div>
           {% if i.video %}
           <video width="640" height="360" controls>
               <source src="{{ i.video.url }}" type="video/mp4">
@@ -54,8 +53,9 @@
       {% endfor %}
 
 
-
+    </div>    
     </div>
+  </div>
 </section>
 
 {% endblock %}

@@ -7,15 +7,19 @@
 
 }
 .button_b{
+	display: inline;
 	height: 40px;
 	width: 100px;
 	border: 1px solid green;
 	border-radius: 10px;
 	background-color: white;
-
+	
 }
 .button_b:hover{
 	background-color: #e86931;
+}
+.video{
+	align-items: center;
 }
 .listt{
 	padding-top: 50px;
