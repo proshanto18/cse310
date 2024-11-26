@@ -1,25 +1,66 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
+<div style="max-width: 700px; margin: 50px auto; padding: 20px; background-color: #121212; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.5); color: #ffffff;">
+  <h1 style="text-align: center; margin-bottom: 30px; color: #ffffff;">Add A Lecture</h1>
 
-<h1>Add A Lecture</h1>
-<form method="post"  enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-
-  <!-- Display error messages if any field is invalid -->
-  {% if form.errors %}
-    <div class="error-messages">
-      {% for field in form %}
-        {% for error in field.errors %}
-          <p>{{ field.label }}: {{ error }}</p>
+  <form method="post" enctype="multipart/form-data" style="padding: 20px;">
+    {% csrf_token %}
+    
+    <!-- Course Field -->
+    <div class="form-group" style="margin-bottom: 20px;">
+      <label for="id_course" style="font-weight: bold; color: #ffffff;">Course</label>
+      <select name="course" id="id_course" class="form-control" style="background-color: #1e1e1e; color: #ffffff; border: 1px solid #444; border-radius: 4px; padding: 10px;">
+        <!-- Assuming dynamic options are rendered in the form -->
+        {% for course in form.course.field.choices %}
+          <option value="{{ course.0 }}" style="color: #ffffff;">{{ course.1 }}</option>
         {% endfor %}
-      {% endfor %}
+      </select>
     </div>
-  {% endif %}
 
-  <button type="submit">ok</button>
-</form>
-{% endblock %}
+    <!-- Lecture Name Field -->
+    <div class="form-group" style="margin-bottom: 20px;">
+      <label for="id_lecture_name" style="font-weight: bold; color: #ffffff;">Lecture Name</label>
+      <input type="text" name="lecture_name" id="id_lecture_name" class="form-control" style="background-color: #1e1e1e; color: #ffffff; border: 1px solid #444; border-radius: 4px; padding: 10px;">
+    </div>
+
+    <!-- Notes Field -->
+    <div class="form-group" style="margin-bottom: 20px;">
+      <label for="id_notes" style="font-weight: bold; color: #ffffff;">Notes</label>
+      <input type="file" name="notes" id="id_notes" class="form-control-file" style="color: #ffffff; border: none; padding: 10px;">
+    </div>
+
+    <!-- Video Field -->
+    <div class="form-group" style="margin-bottom: 20px;">
+      <label for="id_video" style="font-weight: bold; color: #ffffff;">Video</label>
+      <input type="file" name="video" id="id_video" class="form-control-file" style="color: #ffffff; border: none; padding: 10px;">
+    </div>
+
+    <!-- Image Field -->
+    <div class="form-group" style="margin-bottom: 20px;">
+      <label for="id_image" style="font-weight: bold; color: #ffffff;">Image</label>
+      <input type="file" name="image" id="id_image" class="form-control-file" style="color: #ffffff; border: none; padding: 10px;">
+    </div>
+
+    <!-- Error Messages -->
+    {% if form.errors %}
+      <div class="alert alert-danger" style="background-color: #b71c1c; color: #ffffff; margin-top: 20px; padding: 15px; border-radius: 4px;">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>
+                <strong>{{ field.label }}:</strong> {{ error }}
+              </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- Submit Button -->
+    <div style="text-align: center; margin-top: 30px;">
+      <button type="submit" class="btn btn-primary" style="background-color: #1e88e5; color: #ffffff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%;">Submit</button>
+    </div>
+  </form>
+</div>
 {% endblock %}
