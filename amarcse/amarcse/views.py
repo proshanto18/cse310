@@ -37,8 +37,6 @@ def LECTURES(request, course_id):
         'course': course
     })
 
-def LEARNINGCONTENT(request):
-    return render(request, 'components/learningcontent.html')
 
 
 def EXERCISE(request):
@@ -76,7 +74,7 @@ def REGISTER(request):
             my_user = User.objects.create_user(username=uname, email=email, password=pw1)
             my_user.save()
             messages.success(request, "Account created successfully. You can now log in.")
-            return redirect('components/login.html')
+            return redirect('login')
         except Exception as e:
             messages.error(request, "An error occurred while creating the account.")
             return render(request, 'components/register.html')

@@ -17,7 +17,6 @@ urlpatterns = [
     path('academic_course/', views.ACADEMIC_COURSE, name='academic_course'),
     path('career_course/', views.CAREER_COURSE, name='career_course'),
     path('course/<int:course_id>/lectures/', views.LECTURES, name='lecture_list'),
-    path('learn/', views.LEARNINGCONTENT, name='learningcontent'),
     path('exercise/', views.EXERCISE, name='exercise'),
     path('lectures/',include('lectures.urls')),
     path('lectures/',include('course.urls')),

@@ -11,7 +11,9 @@
 <header class="bg-dark text-white text-center py-4">
     <h1>Academic Roadmap</h1>
     <p class="lead">Master Programming step-by-step!</p>
+    {% if user.is_authenticated and user.is_superuser %}
     <a class="btn btn-success mx-2" href="{% url 'create_course' %}">Create A Course</a>
+    {% endif %}
 </header>
 
 <!-- Main Content -->
@@ -30,7 +32,9 @@
                             <h5 class="card-title">{{ ac.name }}</h5>
                             <p class="card-text">{{ ac.description }}.</p>
                             <a href="{% url 'lecture_list' ac.id %}" class="btn btn-primary">View Course</a>
+                            {% if user.is_authenticated and user.is_superuser %}
                             <a class="btn btn-danger mx-2" type="button" href="{% url 'delete_course' ac.id %}">Delete</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

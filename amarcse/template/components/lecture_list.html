@@ -6,17 +6,20 @@
         <div class="title">
             <h1>Course name: {{ course.name }}</h1>
         </div>
-
-        <div class="btn my-3">
-            <a class="btn btn-success mx-2" type="button" href="{% url 'create_lecture' course.id %}">Create A Lecture</a>
-        </div>
+        {% if user.is_authenticated and user.is_superuser %}
+            <div class="btn my-3">
+                <a class="btn btn-success mx-2" type="button" href="{% url 'create_lecture' course.id %}">Create A Lecture</a>
+            </div>
+        {% endif %}
 
         {% for i in lectures %}
         <div class="card mx-auto my-4 p-3" style="max-width: 800px;background-color: #90b36a">
             <h2>Lecture {{ forloop.counter }}: {{ i.lecture_name }}</h2>
             <div class="d-flex justify-content-center my-2">
-                <a class="btn btn-warning mx-2" href="{% url 'update_lecture' course.id i.id %}">Update</a>
-                <a class="btn btn-danger mx-2" href="{% url 'delete_lecture' course.id i.id %}">Delete</a>
+                {% if user.is_authenticated and user.is_superuser %}
+                    <a class="btn btn-warning mx-2" href="{% url 'update_lecture' course.id i.id %}">Update</a>
+                    <a class="btn btn-danger mx-2" href="{% url 'delete_lecture' course.id i.id %}">Delete</a>
+                {% endif %}
             </div>
 
             {% if i.video %}
