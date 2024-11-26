@@ -18,7 +18,7 @@ def create_lecture(request, course_id):
             return redirect('course_lectures', course_id=course.id)
     else:
         form = LectureForm()
-    return render(request, 'courseform.html', {'form': form, 'course': course})
+    return render(request, 'form.html', {'form': form, 'course': course})
 
 # Update an existing lecture
 def update_lecture(request, course_id, p_id):
