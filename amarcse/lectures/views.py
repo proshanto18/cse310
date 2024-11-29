@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Lecture
-from .forms import LectureForm
+from .forms import LectureForm,ExerciseForm
 from course.models import Course
+from .models import Lecture, Exercise
 
 
 
-# Create a new lecture
+
+
 def create_lecture(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     if request.method == 'POST':
@@ -20,7 +21,7 @@ def create_lecture(request, course_id):
         form = LectureForm()
     return render(request, 'form.html', {'form': form, 'course': course})
 
-# Update an existing lecture
+
 def update_lecture(request, course_id, p_id):
     course = get_object_or_404(Course, id=course_id)
     lecture = get_object_or_404(Lecture, id=p_id, course=course)
@@ -34,7 +35,7 @@ def update_lecture(request, course_id, p_id):
     return render(request, 'courseform.html', {'form': form, 'course': course})
 
 
-# Delete a lecture
+
 def delete_lecture(request, course_id, p_id):
     course = get_object_or_404(Course, id=course_id)
     lecture = get_object_or_404(Lecture, id=p_id, course=course)
@@ -42,13 +43,48 @@ def delete_lecture(request, course_id, p_id):
     return redirect('course_lectures', course_id=course.id)
 
 
-# A view to display all lectures (can be used for a lecture list page)
+
 def course_lectures(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     lectures = course.lectures.all()  # Use the related_name from the Lecture model
     return render(request, 'components/lecture_list.html', {'lectures': lectures, 'course': course})
 
 
-# Placeholder view for products (not related to CRUD operations)
+
 def products_view(request):
     return render(request, 'products_view.html')
+
+
+
+
+def create_exercise(request, lecture_id):
+    lecture = get_object_or_404(Lecture, id=lecture_id)
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST, request.FILES)
+        if form.is_valid():
+            exercise = form.save(commit=False)
+            exercise.lecture = lecture
+            exercise.save()
+            return redirect('lecture_list', course_id=lecture.course.id)
+    else:
+        form = ExerciseForm()
+    return render(request, 'exercise_form.html', {'form': form})
+
+def update_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, id=exercise_id)
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST, request.FILES, instance=exercise)
+        if form.is_valid():
+            form.save()
+            return redirect('lecture_list', course_id=exercise.lecture.course.id)
+    else:
+        form = ExerciseForm(instance=exercise)
+    return render(request, 'exercise_form.html', {'form': form})
+
+def delete_exercise(request, exercise_id):
+    exercise = get_object_or_404(Exercise, id=exercise_id)
+    course_id = exercise.lecture.course.id
+    if request.method == 'POST':
+        exercise.delete()
+        return redirect('lecture_list', course_id=course_id)
+    return render(request, 'exercise_delete_form.html', {'exercise': exercise})

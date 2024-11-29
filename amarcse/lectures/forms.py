@@ -13,3 +13,11 @@ class LectureForm(forms.ModelForm):
             raise forms.ValidationError('This field is required')
 
         return name
+
+from django import forms
+from .models import Exercise
+
+class ExerciseForm(forms.ModelForm):
+    class Meta:
+        model = Exercise
+        fields = ['question_file', 'answer_file']
