@@ -7,13 +7,13 @@
             <h1>Course name: {{ course.name }}</h1>
         </div>
         {% if user.is_authenticated and user.is_superuser %}
-            <div class="btn my-3">
+            <div class="d-flex justify-content-center my-3">
                 <a class="btn btn-success mx-2" type="button" href="{% url 'create_lecture' course.id %}">Create A Lecture</a>
             </div>
         {% endif %}
 
         {% for i in lectures %}
-        <div class="card mx-auto my-4 p-3" style="max-width: 800px;background-color: #90b36a">
+        <div class="card mx-auto my-4 p-3" style="max-width: 800px; background-color: #90b36a">
             <h2>Lecture {{ forloop.counter }}: {{ i.lecture_name }}</h2>
             <div class="d-flex justify-content-center my-2">
                 {% if user.is_authenticated and user.is_superuser %}
@@ -34,17 +34,54 @@
             {% if i.image %}
             <div class="my-3">
                 <img src="{{ i.image.url }}" class="img-fluid mx-auto d-block" style="height: 75%;">
-                <a href="{{ i.image.url }}" class="btn btn-link" target="_blank">Download image</a>
+                <div class="d-flex justify-content-center mt-2">
+                    <a href="{{ i.image.url }}" class="btn btn-link mx-2" target="_blank">Download image</a>
+                </div>
             </div>
             {% else %}
             <p>No image available for this lecture.</p>
             {% endif %}
 
             {% if i.notes %}
-            <a href="{{ i.notes.url }}" class="btn btn-link" target="_blank">Download/ View Notes</a>
+            <div class="d-flex justify-content-center my-2">
+                <a href="{{ i.notes.url }}" class="btn btn-success mx-2" target="_blank">Download/ View Notes</a>
+            </div>
             {% else %}
             <p>No notes available for this lecture.</p>
             {% endif %}
+
+            <!-- Exercise Section -->
+            <div class="exercise-section mt-4">
+                <h3>Exercises</h3>
+                {% if user.is_authenticated and user.is_superuser %}
+                <div class="d-flex justify-content-center my-2">
+                    <a class="btn btn-success mx-2" href="{% url 'create_exercise' i.id %}">Create Exercise</a>
+                </div>
+                {% endif %}
+
+                {% for exercise in i.exercises.all %}
+                <div class="exercise-card my-3 p-3" style="background-color: #d5e8d4;">
+                    <h4>Exercise {{ forloop.counter }}</h4>
+                    <p><strong>Question:</strong></p>
+                    <div class="d-flex justify-content-center my-2">
+                        <a href="{{ exercise.question_file.url }}" class="btn btn-danger mx-2" target="_blank">View Question</a>
+                    </div>
+                    <p><strong>Answer:</strong></p>
+                    <div class="d-flex justify-content-center my-2">
+                        <a href="{{ exercise.answer_file.url }}" class="btn btn-danger mx-2" target="_blank">View Answer</a>
+                    </div>
+
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <div class="d-flex justify-content-center my-2">
+                        <a class="btn btn-warning mx-2" href="{% url 'update_exercise' exercise.id %}">Update</a>
+                        <a class="btn btn-danger mx-2" href="{% url 'delete_exercise' exercise.id %}">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <p>No exercises available for this lecture.</p>
+                {% endfor %}
+            </div>
         </div>
         {% endfor %}
     </div>
