@@ -53,21 +53,21 @@ def REGISTER(request):
         # Basic validations
         if not uname or not email or not pw1 or not pw2:
             messages.error(request, "All fields are required.")
-            return render(request, 'components/register.html')
+            return render(request, 'registration/register.html')
 
         if pw1 != pw2:
             messages.error(request, "Passwords do not match.")
-            return render(request, 'components/register.html')
+            return render(request, 'registration/register.html')
 
         # Check if the username already exists
         if User.objects.filter(username=uname).exists():
             messages.error(request, "Username already taken.")
-            return render(request, 'components/register.html')
+            return render(request, 'registration/register.html')
 
         # Check if the email already exists
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already registered.")
-            return render(request, 'components/register.html')
+            return render(request, 'registration/register.html')
 
         # Create the user
         try:
@@ -77,9 +77,9 @@ def REGISTER(request):
             return redirect('login')
         except Exception as e:
             messages.error(request, "An error occurred while creating the account.")
-            return render(request, 'components/register.html')
+            return render(request, 'registration/register.html')
 
-    return render(request, 'components/register.html')
+    return render(request, 'registration/register.html')
 
 
 def LOGIN(request):
@@ -93,7 +93,7 @@ def LOGIN(request):
         else:
             return HttpResponse("Username or password is incorrect!")
 
-    return render(request, 'components/login.html')
+    return render(request, 'registration/login.html')
 
 
 def LOGOUT(request):

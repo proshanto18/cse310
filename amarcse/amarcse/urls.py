@@ -20,7 +20,7 @@ urlpatterns = [
     path('exercise/', views.EXERCISE, name='exercise'),
     path('lectures/',include('lectures.urls')),
     path('course/',include('course.urls')),
-    path('discussion/',include('discussions.urls')),
+    path('blog/',include('blog.urls')),
 
 ]
 

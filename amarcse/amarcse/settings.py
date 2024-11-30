@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     #external apps
     'lectures',
     'course',
-    'discussions',
+    'blog',
+
 ]
 
 MIDDLEWARE = [
@@ -117,11 +118,12 @@ LANGUAGES = [
 
 ]
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
+USE_TZ = True
 
 USE_I18N = True
 
-USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
