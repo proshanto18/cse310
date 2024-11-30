@@ -19,7 +19,8 @@ urlpatterns = [
     path('course/<int:course_id>/lectures/', views.LECTURES, name='lecture_list'),
     path('exercise/', views.EXERCISE, name='exercise'),
     path('lectures/',include('lectures.urls')),
-    path('lectures/',include('course.urls')),
+    path('course/',include('course.urls')),
+    path('discussion/',include('discussions.urls')),
 
 ]
 
