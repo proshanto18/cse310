@@ -1,13 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import BlogForm,CommentForm
-from .models import BlogPost, BlogImage,Like,Comment
-from django.shortcuts import get_object_or_404
+from .forms import BlogForm, CommentForm
+from .models import BlogPost, Like, Comment
 
-# Create your views here.
+
 def blog(request):
-    blog=BlogPost.objects.all().order_by('-created')
-    return render(request,'blog/blog.html',{'blog':blog})
+    blog = BlogPost.objects.all().order_by('-created')
+    return render(request, 'blog/blog.html', {'blog': blog})
 
 
 @login_required
@@ -18,18 +17,16 @@ def add_blog(request):
             blog_post = form.save(commit=False)
             blog_post.author = request.user
             blog_post.save()
-
-
             return redirect('blog')
     else:
         form = BlogForm()
-
-    return render(request, 'blog/blog_form.html', {'form': form,'update': True})
+    return render(request, 'blog/blog_form.html', {'form': form, 'update': False})
 
 
 def blog_details(request, blog_id):
     blog = get_object_or_404(BlogPost, id=blog_id)
     return render(request, 'blog/blog_details.html', {'blog': blog})
+
 
 @login_required
 def like_blog(request, blog_id):
@@ -55,7 +52,6 @@ def add_comment(request, blog_id):
         form = CommentForm()
     return render(request, 'blog/comment_form.html', {'form': form, 'blog': blog})
 
-
 @login_required
 def update_blog(request, blog_id):
     blog = get_object_or_404(BlogPost, id=blog_id, author=request.user)
@@ -66,8 +62,8 @@ def update_blog(request, blog_id):
             return redirect('blog_details', blog_id=blog.id)
     else:
         form = BlogForm(instance=blog)
-
     return render(request, 'blog/blog_form.html', {'form': form, 'update': True})
+
 
 @login_required
 def delete_blog(request, blog_id):
@@ -75,7 +71,6 @@ def delete_blog(request, blog_id):
     if request.method == 'POST':
         blog.delete()
         return redirect('blog')
-
     return render(request, 'blog/delete_blog_form.html', {'blog': blog})
 
 
@@ -86,17 +81,17 @@ def edit_comment(request, comment_id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            return redirect('blog', blog_id=comment.blog.id)
+            return redirect('blog_details', blog_id=comment.blog.id)
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'blog/comment_form.html', {'form': form, 'comment': comment})
+    return render(request, 'blog/comment_form.html', {'form': form, 'comment': comment, 'blog': comment.blog})
+
 
 @login_required
 def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id, author=request.user)  # Ensure only the author can delete
+    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
     if request.method == 'POST':
-        blog_id = comment.blog.id  # Get the blog ID before deleting
+        blog_id = comment.blog.id
         comment.delete()
         return redirect('blog_details', blog_id=blog_id)
     return render(request, 'blog/delete_comment_form.html', {'comment': comment})
-
