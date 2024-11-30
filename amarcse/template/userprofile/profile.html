@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 800px;">
+        <div class="card-header text-center bg-primary text-white">
+            <h2>{{ user.username }}'s Profile</h2>
+        </div>
+        <div class="card-body">
+            <!-- Avatar Section -->
+            <div class="text-center mb-4">
+                <img src="{{ user.userprofile.image.url }}" alt="Avatar" class="rounded-circle" width="150" height="150">
+            </div>
+
+            <!-- User Information -->
+            <div class="mb-3">
+                <p><strong>Full Name:</strong> {% if user.userprofile.first_name and user.userprofile.last_name %}{{ user.userprofile.first_name }} {{ user.userprofile.last_name }}{% else %}Not available{% endif %}</p>
+                <p><strong>Email:</strong> {% if user.userprofile.email %}{{ user.userprofile.email }}{% else %}Not available{% endif %}</p>
+
+                {% if user.userprofile.phone_number %}
+                    <p><strong>Phone Number:</strong> {{ user.userprofile.phone_number }}</p>
+                {% endif %}
+                {% if user.userprofile.address %}
+                    <p><strong>Address:</strong> {{ user.userprofile.address }}</p>
+                {% endif %}
+                {% if user.userprofile.date_of_birth %}
+                    <p><strong>Date of Birth:</strong> {{ user.userprofile.date_of_birth|date:"F j, Y" }}</p>
+                {% endif %}
+                {% if user.userprofile.bio %}
+                    <p><strong>Bio:</strong> {{ user.userprofile.bio }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Edit Profile Button -->
+            <div class="text-center mt-4">
+                <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

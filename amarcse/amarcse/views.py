@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from lectures.models import Lecture
 from course.models import Course
+from userprofile.models import UserProfile
 
 
 def BASE(request):
@@ -43,12 +44,20 @@ def EXERCISE(request):
     return render(request, 'components/exercise.html')
 
 
+ # Import your UserProfile model
+
 def REGISTER(request):
     if request.method == 'POST':
         uname = request.POST.get('username')
         email = request.POST.get('email')
         pw1 = request.POST.get('password1')
         pw2 = request.POST.get('password2')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        phone_number = request.POST.get('phone_number')
+        address = request.POST.get('address')
+        date_of_birth = request.POST.get('date_of_birth')
+        bio = request.POST.get('bio')
 
         # Basic validations
         if not uname or not email or not pw1 or not pw2:
@@ -71,8 +80,22 @@ def REGISTER(request):
 
         # Create the user
         try:
-            my_user = User.objects.create_user(username=uname, email=email, password=pw1)
+            my_user = User.objects.create_user(username=uname, email=email, password=pw1, first_name=first_name, last_name=last_name)
             my_user.save()
+
+            # Create a UserProfile instance and associate it with the user
+            user_profile = UserProfile.objects.create(
+                user=my_user,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                phone_number=phone_number,
+                address=address,
+                date_of_birth=date_of_birth,
+                bio=bio
+            )
+            user_profile.save()
+
             messages.success(request, "Account created successfully. You can now log in.")
             return redirect('login')
         except Exception as e:
@@ -80,7 +103,6 @@ def REGISTER(request):
             return render(request, 'registration/register.html')
 
     return render(request, 'registration/register.html')
-
 
 def LOGIN(request):
     if request.method == "POST":
