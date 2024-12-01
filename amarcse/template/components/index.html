@@ -24,112 +24,58 @@
 </section>
 
 
-<section class="client">
+<section class="courses">
     <div class="container">
-      <!-- 1st row -->
-      <div class="row justify-content-center ">
-        <div class="col-lg-2 ">
-          <div class="c_text1  ">
-          <h6 class="tc" >Top Categories</h6>
-        </div>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-          <div class="c_text2 text-center">
-          <h1 class="bc">Browse Course With Top Categories</h1>
-        </div>
-        </div>
-      </div>
-      <!-- 2nd -->
-      <div class="row">
-        <!-- single item -->
-        <div class="col-lg-3">
-          <div class="s_client">
-            <div class="i_logo ">
-              <i class="fa-brands fa-python" ></i>
-            </div>
-            <div class="i_text ">
-              <h4>Learn Python</h4>
-              <p>unleash your creative potential</p>
-            </div>
 
-          </div>
+        <!-- Career Courses Section -->
+        <h2 class="text-center">Career Courses</h2>
+        {% if career_courses %}
+        <div class="row g-4">
+            {% for cc in career_courses %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ cc.image.url }}" alt="{{ cc.name }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cc.name }}</h5>
+                        <p class="card-text">{{ cc.description }}</p>
+                        <a href="{% url 'lecture_list' cc.id %}" class="btn btn-primary">View Course</a>
+                        {% if user.is_authenticated and user.is_superuser %}
+                        <a class="btn btn-danger mx-2" type="button" href="{% url 'delete_course' cc.id %}">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <p class="text-center">No career courses available at the moment.</p>
+        {% endif %}
 
-        <!-- single item -->
-        <div class="col-lg-3">
-          <div class="s_client">
-            <div class="i_logo ">
-              <i class="fa-solid fa-code"></i>
+        <!-- Academic Courses Section -->
+        <h2 class="text-center mt-5">Academic Courses</h2>
+        {% if academic_courses %}
+        <div class="row g-4">
+            {% for ac in academic_courses %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ ac.image.url }}" alt="{{ ac.name }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ac.name }}</h5>
+                        <p class="card-text">{{ ac.description }}</p>
+                        <a href="{% url 'lecture_list' ac.id %}" class="btn btn-primary">View Course</a>
+                        {% if user.is_authenticated and user.is_superuser %}
+                        <a class="btn btn-danger mx-2" type="button" href="{% url 'delete_course' ac.id %}">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="i_text ">
-              <h4>Algorithm</h4>
-              <p>unleash your creative potential</p>
-            </div>
-
-          </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <p class="text-center">No academic courses available at the moment.</p>
+        {% endif %}
 
-        <!-- single item -->
-        <div class="col-lg-3">
-          <div class="s_client">
-            <div class="i_logo ">
-              <i class="fa-solid fa-database"></i>
-            </div>
-            <div class="i_text ">
-              <h4>Data Structure</h4>
-              <p>unleash your creative potential</p>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="s_client">
-            <div class="i_logo ">
-              <i class="fa-brands fa-java"></i>
-            </div>
-            <div class="i_text ">
-              <h4>Java</h4>
-              <p>unleash your creative potential</p>
-            </div>
-
-          </div>
-        </div>
-         <div class="col-lg-3">
-          <div class="s_client">
-            <div class="i_logo ">
-              <i class="fa-solid fa-tower-cell"></i>
-            </div>
-            <div class="i_text ">
-              <h4>Data Communication</h4>
-              <p>unleash your creative potential</p>
-            </div>
-
-          </div>
-        </div>
-         <div class="col-lg-3">
-          <div class="s_client">
-            <div class="i_logo ">
-              <i class="fa-solid fa-c"></i>
-            </div>
-            <div class="i_text ">
-              <h4>C++</h4>
-              <p>unleash your creative potential</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-     
     </div>
-    <div class="row justify-content-center ">
-        <div class="col-lg-12 text-center ">
-          <button class="bt">Explore more</button>
-        </div>
-      </div>
-    
 </section>
 
 <section class="work">
@@ -191,7 +137,7 @@
      <p class="te2">Discover a wide range of expert-led courses tailored to your personal and professional growth.</p>
      <div class="row justify-content-center ">
       <div class="col-lg-12 text-center ">
-        <button class="bt">Contact Us</button>
+        <a class="btn mx-2" type="button" href="{% url 'register'  %}" style="background-color: #006400; color: white; border-color: #004d00;">Register Now!!!</a>
       </div>
     </div>
     </div>

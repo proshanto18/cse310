@@ -1,35 +1,35 @@
-{% load static %}
 <section>
-    <div >
-         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg navbar-light shadow sticky-top pb-4 ">
+    <div>
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg shadow sticky-top pb-4" style="background-color: #2a4723;">
             <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-                <h2 class="m-0 text-success"><i class="fa fa-book me-3"></i> Amar CSE</h2>
+                <h2 class="m-0 text-light"><i class="fa fa-book me-3"></i> Amar CSE</h2>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="{% url 'index' %}" class="nav-item1 nav-link active">Home</a>
-                    <a href="{% url 'blog' %}" class="nav-item1 nav-link">Discussion Blog</a>
-                    <a href="{% url 'academic_course' %}" class="nav-item1 nav-link">Courses</a>
+                    <a href="{% url 'index' %}" class="nav-item1 nav-link text-light active">Home</a>
+                    <a href="{% url 'blog' %}" class="nav-item1 nav-link text-light">Discussion Blog</a>
+                    <a href="{% url 'academic_course' %}" class="nav-item1 nav-link text-light">Courses</a>
                 </div>
                 {% if user.is_authenticated %}
                     <div class="d-flex align-items-center">
-                        <a href="{% url 'profile' %}"><h2 class="m-0 text-primary"><i class="fa-solid fa-user"></i> Hello
-                            {{ user }} !! </h2></a>
-                        <a href="{% url 'logout' %}" class="btn nav-item1" style="background-color: #4bc944; border-color: #ffffff; ">Logout</a>
+                        <a href="{% url 'code_editor' %}" class="nav-item1 nav-link text-light">Python Editor</a>
+                        <a href="{% url 'profile' %}">
+                            <h3 class="m-0 text-light"><i class="fa-solid fa-user"></i> Hello {{ user }} !! </h3>
+                        </a>
+                        <a href="{% url 'logout' %}" class="btn nav-item1 text-light" style="background-color: #4bc944; border-color: #ffffff;">Logout</a>
                     </div>
                 {% else %}
                     <div class="d-flex align-items-center">
-                        <a href="{% url 'register' %}" class="btn nav-item1" style="background-color: #8cf23e; border-color: #ffffff;">Enroll Now</a>
-                        <a href="{% url 'login' %}" class="btn nav-item1" style="background-color: #86c8f4; border-color: #ffffff;">Login</a>
+                        <a href="{% url 'register' %}" class="btn nav-item1 text-light" style="background-color: #8cf23e; border-color: #ffffff;">Enroll Now</a>
+                        <a href="{% url 'login' %}" class="btn nav-item1 text-light" style="background-color: #86c8f4; border-color: #ffffff;">Login</a>
                     </div>
                 {% endif %}
-
             </div>
         </nav>
-<!-- Navbar End -->
+        <!-- Navbar End -->
     </div>
 </section>

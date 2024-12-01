@@ -17,14 +17,20 @@
     <link rel="stylesheet" href="{% static 'css/lectures.css'%}">
     <link rel="stylesheet" href="{% static 'css/exercise.css'%}">
     <link rel="stylesheet" href="{% static 'css/user.css'%}">
+
+    <link rel="stylesheet" href="{% static 'codemirror/lib/codemirror.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+
+
+
     
 </head>
 <body>
    
     {%include 'components/header.html' %}
 
-    <br>
     {% block content %}{% endblock %}
+
     <br>
 
     {%include 'components/footer.html' %}

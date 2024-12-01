@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/css/css.min.js"></script>
+<h1>Online Python Compiler</h1>
+
+<!-- Code submission form -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Run</button>
+</form>
+
+<!-- Display output or error -->
+{% if output or error %}
+    <h2>Execution Result:</h2>
+    <pre style="background: #f4f4f4; padding: 10px; border: 1px solid #ddd;">
+{{ output|default:"" }}
+{{ error|default:"" }}
+    </pre>
+{% endif %}
+
+<!-- Confirmation message for saved snippet -->
+{% if saved_snippet %}
+    <p style="color: green;">Your snippet has been saved successfully!</p>
+{% endif %}
+
+<!-- List saved snippets -->
+<h2>Your Saved Snippets</h2>
+<ul>
+    {% for snippet in snippets %}
+        <li>
+            <strong>{{ snippet.title }}</strong>
+            <pre style="background: #f4f4f4; padding: 10px; border: 1px solid #ddd;">
+{{ snippet.code }}
+            </pre>
+            <h4>Output:</h4>
+            <pre style="background: #e8f5e9; padding: 10px; border: 1px solid #4caf50;">
+{{ snippet.output|default:"No output" }}
+            </pre>
+            <h4>Error:</h4>
+            <pre style="background: #ffebee; padding: 10px; border: 1px solid #f44336;">
+{{ snippet.error|default:"No error" }}
+            </pre>
+            <em>Saved on {{ snippet.created_at }}</em>
+
+            <!-- Delete button -->
+            <form method="post" action="{% url 'delete_snippet' snippet.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </li>
+    {% empty %}
+        <p>No saved snippets yet.</p>
+    {% endfor %}
+</ul>
+
+<script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+            lineNumbers: true,
+            mode: "python",  // Default language
+            theme: "default"
+        });
+
+        // Dynamically change mode based on selected language
+        document.getElementById('language').addEventListener('change', function () {
+            var mode = this.value;
+            editor.setOption('mode', mode);
+        });
+    </script>
+{% endblock %}

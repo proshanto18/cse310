@@ -14,7 +14,12 @@ def BASE(request):
 
 
 def INDEX(request):
-    return render(request, 'components/index.html')
+    career_courses = Course.objects.filter(category='career')[:3]
+    academic_courses = Course.objects.filter(category='academic')[:3]
+    return render(request, 'components/index.html', {
+        'career_courses': career_courses,
+        'academic_courses': academic_courses,
+    })
 
 
 def ACADEMIC_COURSE(request):
@@ -23,10 +28,9 @@ def ACADEMIC_COURSE(request):
 
 
 def CAREER_COURSE(request):
-    # Fetching all courses in the 'career' category
+
     career_courses = Course.objects.filter(category='career')
 
-    # Rendering the 'career_course.html' template with the context
     return render(request, 'components/career_course.html', {'career_courses': career_courses})
 
 
@@ -44,7 +48,7 @@ def EXERCISE(request):
     return render(request, 'components/exercise.html')
 
 
- # Import your UserProfile model
+
 
 def REGISTER(request):
     if request.method == 'POST':
@@ -59,7 +63,7 @@ def REGISTER(request):
         date_of_birth = request.POST.get('date_of_birth')
         bio = request.POST.get('bio')
 
-        # Basic validations
+
         if not uname or not email or not pw1 or not pw2:
             messages.error(request, "All fields are required.")
             return render(request, 'registration/register.html')
@@ -68,22 +72,21 @@ def REGISTER(request):
             messages.error(request, "Passwords do not match.")
             return render(request, 'registration/register.html')
 
-        # Check if the username already exists
+
         if User.objects.filter(username=uname).exists():
             messages.error(request, "Username already taken.")
             return render(request, 'registration/register.html')
 
-        # Check if the email already exists
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already registered.")
             return render(request, 'registration/register.html')
 
-        # Create the user
+
         try:
             my_user = User.objects.create_user(username=uname, email=email, password=pw1, first_name=first_name, last_name=last_name)
             my_user.save()
 
-            # Create a UserProfile instance and associate it with the user
+
             user_profile = UserProfile.objects.create(
                 user=my_user,
                 first_name=first_name,
@@ -111,7 +114,7 @@ def LOGIN(request):
         user = authenticate(request, username=uname, password=passw)
         if user is not None:
             login(request, user)
-            return render(request, 'components/index.html',{'username':uname})
+            return redirect('profile')
         else:
             return HttpResponse("Username or password is incorrect!")
 

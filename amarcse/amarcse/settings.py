@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'course',
     'blog',
     'userprofile',
+    'code_editor',
 
 ]
 

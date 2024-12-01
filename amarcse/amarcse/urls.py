@@ -22,6 +22,7 @@ urlpatterns = [
     path('course/',include('course.urls')),
     path('blog/',include('blog.urls')),
     path('blog/',include('userprofile.urls')),
+path('code_editor/',include('code_editor.urls')),
 
 ]
 

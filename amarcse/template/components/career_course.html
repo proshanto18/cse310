@@ -31,7 +31,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ cc.name }}</h5>
                             <p class="card-text">{{ cc.description }}.</p>
+                            {% if user.is_authenticated  %}
                             <a href="{% url 'lecture_list' cc.id %}" class="btn btn-primary">View Course</a>
+                             {% endif %}
                             {% if user.is_authenticated and user.is_superuser %}
                             <a class="btn btn-danger mx-2" type="button" href="{% url 'delete_course' cc.id %}">Delete</a>
                             {% endif %}
