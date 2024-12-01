@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>This is Blog</h1>
-    <a href="{% url 'addblog' %}" class="btn btn-primary px-5 py-2">Add a blog</a>
+    <div class="py-4 mb-4 text-center bg-success text-white">
+        <h1 class="m-0">Welcome to AmarCSE Discussions</h1>
+    </div>
 
+    <a href="{% url 'addblog' %}" class="btn btn-primary px-5 py-2">Add a blog</a>
 
     <div class="my-3">
         <a href="?sort=date" class="btn btn-secondary">Sort by Most Recent</a>
