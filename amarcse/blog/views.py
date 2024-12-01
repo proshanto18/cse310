@@ -2,11 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import BlogForm, CommentForm
 from .models import BlogPost, Like, Comment
+from django.db.models import Count
+
 
 
 def blog(request):
-    blog = BlogPost.objects.all().order_by('-created')
-    return render(request, 'blog/blog.html', {'blog': blog})
+    blogs = BlogPost.objects.annotate(like_count=Count('likes'))
+    sort_by = request.GET.get('sort', 'date')
+    if sort_by == 'likes':
+        blogs = blogs.order_by('-like_count', '-created')
+    else:
+        blogs = blogs.order_by('-created')
+
+    return render(request, 'blog/blog.html', {'blog': blogs})
+
 
 
 @login_required
